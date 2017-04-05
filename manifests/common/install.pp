@@ -8,15 +8,17 @@ class slurm::common::install {
 
   if $slurm::node or $slurm::controller or $slurm::client {
     package { 'slurm': }
+    package { 'slurm-blcr': }
     package { 'slurm-devel': }
     package { 'slurm-munge': }
     package { 'slurm-perlapi': }
     package { 'slurm-plugins': }
-    package { 'slurm-sjobexit': }
-    package { 'slurm-sjstat': }
+    package { 'slurm-contribs': }
   }
 
   if $slurm::slurmdbd {
+    package { 'slurm': }
+    package { 'slurm-munge': }
     package { 'slurm-slurmdbd': }
     package { 'slurm-sql': }
   }
