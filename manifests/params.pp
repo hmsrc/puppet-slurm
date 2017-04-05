@@ -286,7 +286,7 @@ class slurm::params {
       'UsePAM' => '0',
       'VSizeFactor' => '0',
       'WaitTime' => '0',
-    }
+    },
     '17.02' => {
       'AccountingStorageType' => 'accounting_storage/slurmdbd',
       'AccountingStoreJobComment' => 'YES',
@@ -407,7 +407,7 @@ class slurm::params {
       'MessageTimeout' => '10',
       'PluginDir' => '/usr/lib64/slurm',
       'TrackSlurmctldDown' => 'no',
-    }
+    },
     '17.02' => {
       'ArchiveDir' => '/tmp',
       'ArchiveEvents' => 'no',
@@ -420,6 +420,7 @@ class slurm::params {
       'MessageTimeout' => '10',
       'PluginDir' => '/usr/lib64/slurm',
       'TrackSlurmctldDown' => 'no',
+    }
   }
 
   $partition_keys = {
