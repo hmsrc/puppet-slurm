@@ -13,6 +13,7 @@ class slurm::node::config {
       owner  => 'root',
       group  => 'root',
       mode   => '0755',
+      onlyif => "${slurm::release} == '16.05'"
       source => $slurm::cgroup_release_common_source_real,
     }->
     file { "${slurm::cgroup_release_agent_dir_real}/release_blkio":
