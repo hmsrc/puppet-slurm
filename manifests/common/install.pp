@@ -8,7 +8,6 @@ class slurm::common::install {
 
   if $slurm::node or $slurm::controller or $slurm::client {
     package { 'slurm': }
-    package { 'slurm-blcr': }
     package { 'slurm-devel': }
     package { 'slurm-munge': }
     package { 'slurm-perlapi': }
