@@ -25,6 +25,6 @@ class slurm::common::install {
   if $slurm::install_pam            { package { 'slurm-pam_slurm': } }
   if $slurm::install_torque_wrapper { package { 'slurm-torque': } }
   if $slurm::install_lua            { package { 'slurm-lua': } }
-  if $slurm::install_blcr           { package { 'slurm-blcr': } }
+  #if $slurm::install_blcr           { package { 'slurm-blcr': } }
 
 }
