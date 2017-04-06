@@ -6,7 +6,7 @@ class slurm::common::install {
     require => $slurm::package_require,
   }
 
-  if $release == '16.05' and $slurm::node or $slurm::controller or $slurm::client { 
+  if $release == '16.05' and ( $slurm::node or $slurm::controller or $slurm::client ) { 
     package { 'slurm': }
     package { 'slurm-devel': }
     package { 'slurm-munge': }
@@ -16,7 +16,7 @@ class slurm::common::install {
     package { 'slurm-sjstat': }
   }
 
-  if $release == '17.02' and $slurm::node or $slurm::controller or $slurm::client {
+  if $release == '17.02' and ( $slurm::node or $slurm::controller or $slurm::client ) {
     package { 'slurm': }
     package { 'slurm-devel': }
     package { 'slurm-munge': }
