@@ -8,7 +8,7 @@ class slurm::node::config {
       group  => 'root',
       mode   => '0755',
     }->
-    if $slurm::release == '16.05' {
+    if $release == '16.05' {
       file { "${slurm::cgroup_release_agent_dir_real}/release_common":
         ensure => 'file',
         owner  => 'root',
