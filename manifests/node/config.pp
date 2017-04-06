@@ -8,13 +8,15 @@ class slurm::node::config {
       group  => 'root',
       mode   => '0755',
     }->
-    file { "${slurm::cgroup_release_agent_dir_real}/release_common":
-      ensure => 'file',
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0755',
-      source => $slurm::cgroup_release_common_source_real,
-    }->
+    if $slurm::release == '16.05' {
+      file { "${slurm::cgroup_release_agent_dir_real}/release_common":
+        ensure => 'file',
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0755',
+        source => $slurm::cgroup_release_common_source_real,
+      }->
+    }
     file { "${slurm::cgroup_release_agent_dir_real}/release_blkio":
       ensure => 'link',
       target => 'release_common',
