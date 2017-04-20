@@ -7,24 +7,23 @@ class slurm::common::install {
   }
 
   if $slurm::node or $slurm::controller or $slurm::client {
-    if $release == '16.05' {
-      package { 'slurm': }
-      package { 'slurm-devel': }
-      package { 'slurm-munge': }
-      package { 'slurm-perlapi': }
-      package { 'slurm-plugins': }
-      package { 'slurm-sjobexit': }
-      package { 'slurm-sjstat': }
-    }
-
-    if $release == '17.02' {
+  #  if $release == '16.05' {
+  #    package { 'slurm': }
+  #    package { 'slurm-devel': }
+  #    package { 'slurm-munge': }
+  #    package { 'slurm-perlapi': }
+  #    package { 'slurm-plugins': }
+  #    package { 'slurm-sjobexit': }
+  #    package { 'slurm-sjstat': }
+  #  }
+  #  if $release == '17.02' {
       package { 'slurm': }
       package { 'slurm-devel': }
       package { 'slurm-munge': }
       package { 'slurm-perlapi': }
       package { 'slurm-plugins': }
       package { 'slurm-contribs': }
-    }
+   # }
   }
 
   if $slurm::slurmdbd {
