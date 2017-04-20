@@ -6,23 +6,25 @@ class slurm::common::install {
     require => $slurm::package_require,
   }
 
-  if $release == '16.05' and ( $slurm::node or $slurm::controller or $slurm::client ) { 
-    package { 'slurm': }
-    package { 'slurm-devel': }
-    package { 'slurm-munge': }
-    package { 'slurm-perlapi': }
-    package { 'slurm-plugins': }
-    package { 'slurm-sjobexit': }
-    package { 'slurm-sjstat': }
-  }
+  if $slurm::node or $slurm::controller or $slurm::client {
+    if $release == '16.05' {
+      package { 'slurm': }
+      package { 'slurm-devel': }
+      package { 'slurm-munge': }
+      package { 'slurm-perlapi': }
+      package { 'slurm-plugins': }
+      package { 'slurm-sjobexit': }
+      package { 'slurm-sjstat': }
+    }
 
-  if $release == '17.02' and ( $slurm::node or $slurm::controller or $slurm::client ) {
-    package { 'slurm': }
-    package { 'slurm-devel': }
-    package { 'slurm-munge': }
-    package { 'slurm-perlapi': }
-    package { 'slurm-plugins': }
-    package { 'slurm-contribs': }
+    if $release == '17.02' {
+      package { 'slurm': }
+      package { 'slurm-devel': }
+      package { 'slurm-munge': }
+      package { 'slurm-perlapi': }
+      package { 'slurm-plugins': }
+      package { 'slurm-contribs': }
+    }
   }
 
   if $slurm::slurmdbd {
