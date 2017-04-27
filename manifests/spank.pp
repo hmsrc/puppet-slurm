@@ -33,7 +33,7 @@ define slurm::spank (
     }
   }
 
-  file { "SLURM SPANK ${title} config":
+  file { "SLURM SPANK x11 config":
     ensure  => 'file',
     path    => $config_path_real,
     owner   => 'root',
