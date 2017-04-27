@@ -5,7 +5,7 @@ define slurm::spank (
   $arguments = {},
   $required = false,
   $config_path = undef,
-  $manage_package = false,
+  $manage_package = true,
   $package_name = "slurm-spank-${title}",
   $restart_slurmd = false,
 ) {
@@ -33,7 +33,7 @@ define slurm::spank (
     }
   }
 
-  file { "SLURM SPANK x11 config":
+  file { "SLURM SPANK ${title} config":
     ensure  => 'file',
     path    => $config_path_real,
     owner   => 'root',
