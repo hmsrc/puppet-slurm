@@ -23,7 +23,7 @@ class slurm::common::install {
       }~>
       package { 'slurm-spank-x11':
         ensure               => installed,
-        before               => File["SLURM SPANK ${title} config"],
+        before               => File["SLURM SPANK x11 config"],
         reinstall_on_refresh => true,
       }
       package { 'slurm-devel': }
