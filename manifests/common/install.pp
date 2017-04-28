@@ -17,11 +17,11 @@ class slurm::common::install {
   #    package { 'slurm-sjstat': }
   #  }
   #  if $release == '17.02' {
-      #package { 'slurm': 
+      # package { 'slurm': 
       #  ensure => installed,
       #  audit  => true,
       #}~>
-      #package { 'slurm-spank-x11':
+      # package { 'slurm-spank-x11':
       #  ensure               => installed,
       #  before               => File["SLURM SPANK x11 config"],
       #  reinstall_on_refresh => true,
@@ -32,7 +32,7 @@ class slurm::common::install {
       package { 'slurm-perlapi': }
       package { 'slurm-plugins': }
       package { 'slurm-contribs': }
-    }
+    #}
   }
 
   if $slurm::slurmdbd {
