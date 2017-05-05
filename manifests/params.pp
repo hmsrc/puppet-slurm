@@ -567,7 +567,7 @@ class slurm::params {
 
   case $::osfamily {
     'RedHat': {
-      $logrotate_slurm_postrotate     = '/etc/init.d/slurm reconfig >/dev/null 2>&1'
+      $logrotate_slurm_postrotate     = '/bin/scontrol reconfig >/dev/null 2>&1'
       $logrotate_slurmdbd_postrotate  = '/etc/init.d/slurmdbd reconfig >/dev/null 2>&1'
       $logrotate_syslog_postrotate    = '/bin/kill -HUP `cat /var/run/syslogd.pid 2> /dev/null` 2> /dev/null || true'
     }
