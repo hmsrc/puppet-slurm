@@ -216,7 +216,7 @@ class slurm::controller::config {
       create_mode   => '0640',
       create_owner  => $slurm::slurm_user,
       create_group  => 'root',
-      preroate      => $slurm::_logrotate_slurm_prerotate
+      prerotate     => $slurm::_logrotate_slurm_protate
       postrotate    => $slurm::_logrotate_slurmctld_postrotate,
     }
   }
