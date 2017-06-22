@@ -567,7 +567,7 @@ class slurm::params {
 
   case $::osfamily {
     'RedHat': {
-      $logrotate_slurm_prerotate      = '/bin/cp -r /var/log/slurm/*.gz /n/log/slurm/`hostname`/ 2>&1'
+      $logrotate_slurm_prerotate      = '/bin/sh /n/log/slurm/pre_rotate.sh >/dev/null 2>&1'
       $logrotate_slurm_postrotate     = '/bin/systemctl restart slurmd >/dev/null 2>&1'
       $logrotate_slurmctld_postrotate = '/bin/systemctl restart slurmctld >/dev/null 2>&1'
       $logrotate_slurmdbd_postrotate  = '/bin/systemctl restart slurmdbd >/dev/null 2>&1'
