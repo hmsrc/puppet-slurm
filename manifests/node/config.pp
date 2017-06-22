@@ -176,7 +176,7 @@ class slurm::node::config {
       create_mode   => '0640',
       create_owner  => $slurm::slurmd_user,
       create_group  => 'root',
-      preroate      => $slurm::_logrotate_slurm_prerotate,
+      prerotate     => $slurm::_logrotate_slurm_prerotate,
       postrotate    => $slurm::_logrotate_slurm_postrotate,
     }
   }

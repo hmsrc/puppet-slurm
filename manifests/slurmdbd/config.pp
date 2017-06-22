@@ -71,6 +71,7 @@ class slurm::slurmdbd::config {
       create_mode   => '0640',
       create_owner  => $slurm::slurm_user,
       create_group  => 'root',
+      prerotate     => $slurm::_logrotate_slurm_prerotate,
       postrotate    => $slurm::_logrotate_slurmdbd_postrotate,
     }
   }
