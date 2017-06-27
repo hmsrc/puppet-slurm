@@ -276,7 +276,7 @@ class slurm (
     $_logrotate_slurmdbd_postrotate = pick($logrotate_slurmdbd_postrotate, $slurm::params::logrotate_syslog_postrotate)
   } else {
     $_slurmctld_log_file = $slurmctld_log_file
-    $_slurmdbd_log_file = $slurmdbd_log_filesyslog
+    $_slurmdbd_log_file = $slurmdbd_log_file
     $_slurmd_log_file = $slurmd_log_file
     $_logrotate_slurm_postrotate = pick($logrotate_slurm_postrotate, $slurm::params::logrotate_slurm_postrotate)
     $_logrotate_slurm_prerotate = pick($logrotate_slurm_prerotate, $slurm::params::logrotate_slurm_prerotate)
