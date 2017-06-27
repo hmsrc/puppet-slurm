@@ -279,6 +279,7 @@ class slurm (
     $_slurmdbd_log_file = $slurmdbd_log_file
     $_slurmd_log_file = $slurmd_log_file
     $_logrotate_slurm_postrotate = pick($logrotate_slurm_postrotate, $slurm::params::logrotate_slurm_postrotate)
+    $_logrotate_slurmctld_postrotate = pick($logrotate_slurmctld_postrotate, $slurm::params::logrotate_slurmctld_postrotate)
     $_logrotate_slurm_prerotate = pick($logrotate_slurm_prerotate, $slurm::params::logrotate_slurm_prerotate)
     $_logrotate_slurmdbd_postrotate = pick($logrotate_slurmdbd_postrotate, $slurm::params::logrotate_slurmdbd_postrotate)
   }
