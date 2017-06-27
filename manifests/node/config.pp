@@ -7,28 +7,28 @@ class slurm::node::config {
       owner  => 'root',
       group  => 'root',
       mode   => '0755',
-    }->
-    file { "${slurm::cgroup_release_agent_dir_real}/release_blkio":
+    }
+    -> file { "${slurm::cgroup_release_agent_dir_real}/release_blkio":
       ensure => 'link',
       target => 'release_common',
-    }->
-    file { "${slurm::cgroup_release_agent_dir_real}/release_cpuacct":
+    }
+    -> file { "${slurm::cgroup_release_agent_dir_real}/release_cpuacct":
       ensure => 'link',
       target => 'release_common',
-    }->
-    file { "${slurm::cgroup_release_agent_dir_real}/release_cpuset":
+    }
+    -> file { "${slurm::cgroup_release_agent_dir_real}/release_cpuset":
       ensure => 'link',
       target => 'release_common',
-    }->
-    file { "${slurm::cgroup_release_agent_dir_real}/release_freezer":
+    }
+    -> file { "${slurm::cgroup_release_agent_dir_real}/release_freezer":
       ensure => 'link',
       target => 'release_common',
-    }->
-    file { "${slurm::cgroup_release_agent_dir_real}/release_memory":
+    }
+    -> file { "${slurm::cgroup_release_agent_dir_real}/release_memory":
       ensure => 'link',
       target => 'release_common',
-    }->
-    file { "${slurm::cgroup_release_agent_dir_real}/release_devices":
+    }
+    -> file { "${slurm::cgroup_release_agent_dir_real}/release_devices":
       ensure => 'link',
       target => 'release_common',
     }
@@ -149,14 +149,14 @@ class slurm::node::config {
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
     include ::systemd
     augeas { 'slurmd.service':
-      context => "$slurm::slurm_augeas_systemd_dir/slurmd.service",
+      context => "${slurm::slurm_augeas_systemd_dir}/slurmd.service",
       changes => [
-        "set Unit/ConditionPathExists/value $slurm::slurm_conf_path",
-        "set Service/PIDFile/value $slurm::pid_dir/slurmd.pid",
+        "set Unit/ConditionPathExists/value ${slurm::slurm_conf_path}",
+        "set Service/PIDFile/value ${slurm::pid_dir}/slurmd.pid",
       ],
       notify  => Service['slurmd'],
-    } ~>
-    Exec['systemctl-daemon-reload']
+    }
+    ~> Exec['systemctl-daemon-reload']
   }
 
   if $slurm::manage_logrotate {
@@ -168,6 +168,7 @@ class slurm::node::config {
       copytruncate  => false,
       delaycompress => false,
       ifempty       => false,
+      dateext       => true,
       rotate        => '10',
       sharedscripts => true,
       size          => '10M',
@@ -175,6 +176,7 @@ class slurm::node::config {
       create_mode   => '0640',
       create_owner  => $slurm::slurmd_user,
       create_group  => 'root',
+      prerotate     => $slurm::_logrotate_slurm_prerotate,
       postrotate    => $slurm::_logrotate_slurm_postrotate,
     }
   }

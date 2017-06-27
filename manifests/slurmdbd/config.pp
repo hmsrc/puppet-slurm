@@ -44,14 +44,14 @@ class slurm::slurmdbd::config {
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
     include ::systemd
     augeas { 'slurmdbd.service':
-      context => "$slurm::slurm_augeas_systemd_dir/slurmdbd.service",
+      context => "${slurm::slurm_augeas_systemd_dir}/slurmdbd.service",
       changes => [
-        "set Unit/ConditionPathExists/value $slurm::slurmdbd_conf_path",
-        "set Service/PIDFile/value $slurm::pid_dir/slurmdbd.pid",
+        "set Unit/ConditionPathExists/value ${slurm::slurmdbd_conf_path}",
+        "set Service/PIDFile/value ${slurm::pid_dir}/slurmdbd.pid",
       ],
       notify  => Service['slurmdbd'],
-    } ~>
-    Exec['systemctl-daemon-reload']
+    }
+    ~> Exec['systemctl-daemon-reload']
   }
 
   if $slurm::manage_logrotate {
@@ -63,6 +63,7 @@ class slurm::slurmdbd::config {
       copytruncate  => false,
       delaycompress => false,
       ifempty       => false,
+      dateext       => true,
       rotate        => '10',
       sharedscripts => true,
       size          => '10M',
@@ -70,6 +71,7 @@ class slurm::slurmdbd::config {
       create_mode   => '0640',
       create_owner  => $slurm::slurm_user,
       create_group  => 'root',
+      prerotate     => $slurm::_logrotate_slurm_prerotate,
       postrotate    => $slurm::_logrotate_slurmdbd_postrotate,
     }
   }
