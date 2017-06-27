@@ -44,6 +44,7 @@ class slurm (
   $manage_scripts                = true,
   $manage_firewall               = true,
   $manage_logrotate              = true,
+  $logrotate_slurm_prerotate     = undef,
   $logrotate_slurm_postrotate    = undef,
   $logrotate_slurmdbd_postrotate = undef,
   $use_syslog                    = false,
@@ -270,6 +271,7 @@ class slurm (
     $_slurmctld_log_file = 'UNSET'
     $_slurmdbd_log_file = 'UNSET'
     $_slurmd_log_file = 'UNSET'
+    $_logrotate_slurm_prerotate = pick($logrotate_slurm_prerotate, $slurm::params::logrotate_syslog_prerotate)
     $_logrotate_slurm_postrotate = pick($logrotate_slurm_postrotate, $slurm::params::logrotate_syslog_postrotate)
     $_logrotate_slurmdbd_postrotate = pick($logrotate_slurmdbd_postrotate, $slurm::params::logrotate_syslog_postrotate)
   } else {
@@ -277,6 +279,7 @@ class slurm (
     $_slurmdbd_log_file = $slurmdbd_log_file
     $_slurmd_log_file = $slurmd_log_file
     $_logrotate_slurm_postrotate = pick($logrotate_slurm_postrotate, $slurm::params::logrotate_slurm_postrotate)
+    $_logrotate_slurm_prerotate = pick($logrotate_slurm_prerotate, $slurm::params::logrotate_syslog_prerotate)
     $_logrotate_slurmdbd_postrotate = pick($logrotate_slurmdbd_postrotate, $slurm::params::logrotate_slurmdbd_postrotate)
   }
 
@@ -355,33 +358,33 @@ class slurm (
   if $node {
     include slurm::node
 
-    Anchor['slurm::start']->
-    Class['slurm::node']->
-    Anchor['slurm::end']
+    Anchor['slurm::start']
+    -> Class['slurm::node']
+    -> Anchor['slurm::end']
   }
 
   if $controller {
     include slurm::controller
 
-    Anchor['slurm::start']->
-    Class['slurm::controller']->
-    Anchor['slurm::end']
+    Anchor['slurm::start']
+    -> Class['slurm::controller']
+    -> Anchor['slurm::end']
   }
 
   if $slurmdbd {
     include slurm::slurmdbd
 
-    Anchor['slurm::start']->
-    Class['slurm::slurmdbd']->
-    Anchor['slurm::end']
+    Anchor['slurm::start']
+    -> Class['slurm::slurmdbd']
+    -> Anchor['slurm::end']
   }
 
   if $client {
     include slurm::client
 
-    Anchor['slurm::start']->
-    Class['slurm::client']->
-    Anchor['slurm::end']
+    Anchor['slurm::start']
+    -> Class['slurm::client']
+    -> Anchor['slurm::end']
   }
 
 }
