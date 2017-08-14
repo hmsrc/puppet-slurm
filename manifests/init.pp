@@ -186,7 +186,10 @@ class slurm (
 ) inherits slurm::params {
 
   # Parameter validations
-  validate_bool($node, $controller, $slurmdbd, $client)
+  validate_bool($controller)
+  validate_bool($slurmdbd)
+  validate_bool($client)
+  validate_bool($node)
   validate_bool($manage_slurm_user, $manage_slurm_conf, $manage_scripts, $manage_firewall, $manage_logrotate, $use_syslog)
   validate_bool($install_pam, $install_torque_wrapper, $install_lua, $install_blcr)
   validate_bool($manage_state_dir_nfs_mount, $manage_job_checkpoint_dir_nfs_mount)
@@ -203,7 +206,9 @@ class slurm (
 
   validate_array($service_ulimits, $partitionlist, $cgroup_allowed_devices)
 
-  validate_hash($slurm_conf_override, $slurmdbd_conf_override, $spank_plugins)
+  validate_hash($slurm_conf_override)
+  validate_hash($slurmdbd_conf_override)
+  validate_hash($spank_plugins)
 
   if $node and $controller {
     fail("Module ${module_name}: Does not support both node and controller being enabled on the same host.")

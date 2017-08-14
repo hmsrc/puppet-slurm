@@ -6,6 +6,9 @@ class slurm::common::install {
     require => $slurm::package_require,
   }
 
+  package { 'slurm': }
+  package { 'slurm-munge': }
+
   if $slurm::node or $slurm::controller or $slurm::client {
   #  if $release == '16.05' {
   #    package { 'slurm': }
@@ -17,7 +20,7 @@ class slurm::common::install {
   #    package { 'slurm-sjstat': }
   #  }
   #  if $release == '17.02' {
-      # package { 'slurm': 
+      # package { 'slurm':
       #  ensure => installed,
       #  audit  => true,
       #}~>
@@ -26,9 +29,7 @@ class slurm::common::install {
       #  before               => File["SLURM SPANK x11 config"],
       #  reinstall_on_refresh => true,
       #}
-      package { 'slurm': }
       package { 'slurm-devel': }
-      package { 'slurm-munge': }
       package { 'slurm-perlapi': }
       package { 'slurm-plugins': }
       package { 'slurm-contribs': }
@@ -36,8 +37,6 @@ class slurm::common::install {
   }
 
   if $slurm::slurmdbd {
-    package { 'slurm': }
-    package { 'slurm-munge': }
     package { 'slurm-slurmdbd': }
     package { 'slurm-sql': }
   }
