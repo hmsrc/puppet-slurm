@@ -129,7 +129,7 @@ class slurm::node::config {
     }
   }
 
-  if $::gpu_node == 'true' {
+  if $::gpu_node == 'true' and $slurm::manage_gpu == 'true' {
     file { '/etc/slurm/gres.conf':
       content => template('slurm/gres/gres.conf.erb'),
       owner   => 'root',

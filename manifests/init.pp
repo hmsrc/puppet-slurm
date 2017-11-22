@@ -44,6 +44,7 @@ class slurm (
   $manage_scripts                = true,
   $manage_firewall               = true,
   $manage_logrotate              = true,
+  $manage_gpu                    = false,
   $logrotate_slurm_prerotate     = undef,
   $logrotate_slurm_postrotate    = undef,
   $logrotate_slurmdbd_postrotate = undef,
